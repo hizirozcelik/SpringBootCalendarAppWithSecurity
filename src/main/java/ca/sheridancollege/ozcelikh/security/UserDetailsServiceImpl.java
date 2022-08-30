@@ -30,6 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		// Find the user based on the username (read email)
+		// new comment
 		ca.sheridancollege.ozcelikh.beans.User user = da.findUserAccount(username);
 		
 		// If the user doesn't exist, throw an exception
