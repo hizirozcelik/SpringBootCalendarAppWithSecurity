@@ -1,0 +1,143 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+	<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="../static/css/mycss.css" th:href="@{/css/mycss.css}" />
+    <title>Calendar Events</title>
+  </head>
+  <body>
+      <nav th:insert="fragments/nav.html :: nav"></nav>
+       
+   <div class="container-fluid bg-light">
+   
+   <div class="row">
+	    	<div class="col-sm-12 bg-light">
+	    	
+	    		<h2>Event List</h2>
+	    	</div>
+
+  		</div>
+    	    
+		<div class="row">
+			<div class="col-sm-12" >
+				<table class="table table-striped" th:if="${eventList != null AND eventList != ''}">
+				  <thead>
+				    <tr>
+		
+				      <th scope="col">Title</th>
+				      <th scope="col">Date</th>
+				      <th scope="col">Time</th>
+				      <th scope="col">Details</th>
+				      <th scope="col">Category</th>
+				      <th scope="col">Tag</th>
+
+				      
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="e : ${eventList}">
+				   
+				      <td th:text="${e.title}">Dentist</td>
+				      <td th:text="${e.eventDate}">2021-12-02</td>
+				      <td th:text="${e.eventTime}">12:00</td>
+				      <td th:text="${e.details}">Leave before 30 mins from appointment</td>
+				      <td th:text="${e.category}">Personal</td>
+				      <td th:text="${e.tag}">Red</td>
+				      
+
+				    </tr>
+				    
+				  </tbody>
+				</table>		
+			</div>
+		</div>
+    
+    	<div class="row">
+	    	<div class="col-sm-6 bg-light" ><h2>Please enter new calendar event</h2></div>
+	    	<div class="col-sm-3 bg-light" ></div>
+	  		<div class="col-sm-3 bg-light" ></div>
+  		</div>
+    	    
+   		<div class="row">
+   			<form method ="post" action="#" th:action="@{/secure/addEvent}" th:object=${event}>
+				 
+		   	<div class="form-group gt-3">
+		   	
+		   		<div class="row">
+		   			  			
+		   			<div class="col-md-6 form-group">
+		   				
+		   				<input type="hidden" name="eventId" th:field="*{eventId}" />	
+		   					   			
+			   			<label for="title" class="form-label">Title</label>
+			   			<input type="text" class="form-control" th:field="*{title}" />
+			   					   			
+			   			<label for="eventDate" class="form-label">Date</label>
+			   			<input type="date" class="form-control" th:field="*{eventDate}" />
+			   			
+			   			<label for="eventTime" class="form-label">Time</label>
+			   			<input type="time" class="form-control" th:field="*{eventTime}" />
+			   				
+		   			</div>
+		   			  			
+		   		</div>
+		   		
+		   		<div class="row">
+		   			  			
+		   			<div class="col-md-6 form-group">
+		   				
+		   					   			
+			   			<label for="details" class="form-label">Notes</label>
+			   			<input type="text" class="form-control" th:field="*{details}" />
+			   			
+			   			<label for="category" class="form-label">Categories</label>
+				   			
+				   			<select class="form-select" th:field="*{category}">
+				   			
+			        			<option th:each="c : *{CATEGORIES}" th:value="${c}" th:text="${c}" ></option>
+			        			
+			      			</select>
+			      		
+			      		<label for="tag" class="form-label">Tags</label>
+				   			
+				   			<select class="form-select" th:field="*{tag}">
+				   			
+			        			<option th:each="t : *{TAGS}" th:value="${t}" th:text="${t}" ></option>
+			        			
+			      			</select>
+
+		   			</div>
+		   			  			
+		   		</div>
+		   	</div>
+		   		   				   		
+		   		<br />
+		   		
+		   		<div class="button">
+							
+					<button type="submit" class="btn btn-primary">Add Event!</button>
+							
+				</div>
+				
+		</form>
+			
+
+		<footer th:replace="fragments/footer.html :: footer"></footer>
+   
+    </div>
+</div>
+   
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
+
